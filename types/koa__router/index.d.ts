@@ -43,7 +43,7 @@
         strict?: boolean;
     }
 
-    interface RouterParamContext<StateT = any, CustomT = {}> {
+    interface RouterParamContext<StateT = Koa.DefaultState, CustomT = Koa.DefaultContext> {
         /**
          * url params
          */
@@ -59,9 +59,9 @@
         _matchedRouteName: string | undefined;
     }
 
-    type RouterContext<StateT = any, CustomT = {}> = Koa.ParameterizedContext<StateT, CustomT & RouterParamContext<StateT, CustomT>>;
+    type RouterContext<StateT = Koa.DefaultState, CustomT = Koa.DefaultContext> = Koa.ParameterizedContext<StateT, CustomT & RouterParamContext<StateT, CustomT>>;
 
-    type Middleware<StateT = any, CustomT = {}> = Koa.Middleware<StateT, CustomT & RouterParamContext<StateT, CustomT>>;
+    type Middleware<StateT = Koa.DefaultState, CustomT = Koa.DefaultContext> = Koa.Middleware<StateT, CustomT & RouterParamContext<StateT, CustomT>>;
 
     interface ParamMiddleware {
         (param: string, ctx: RouterContext, next: Koa.Next): any;
@@ -155,7 +155,7 @@
     }
 }
 
-declare class Router<StateT = any, CustomT = {}> {
+declare class Router<StateT = Koa.DefaultState, CustomT = Koa.DefaultContext> {
     params: object;
     stack: Router.Layer[];
 
